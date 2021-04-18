@@ -13,6 +13,29 @@ const obtenerEmpleados = async (req, res) =>{
     });
 }   
 
+const obtenerEmpleado = async (req, res) =>{
+    const numeroEmpleado = req.params.numeroEmpleado;
+    
+    try {
+        const empleado = await Empleado.findOne( {numeroEmpleado} );
+        
+        if( !empleado ){
+            res.status(404).json({
+                ok:false,
+                msg:'No se encuentra registrado ese empleado'
+            });
+        }
+
+        res.json({
+            ok: true,
+            empleado
+        });
+    } catch (error) {
+        
+    }
+
+}   
+
 const insertarEmpleado = async (req, res = response ) =>{
 
     const {numeroEmpleado} = req.body;
@@ -127,6 +150,7 @@ const borrarEmpleado = async ( req, res = response) => {
 
 module.exports = {
     obtenerEmpleados,
+    obtenerEmpleado,
     insertarEmpleado,
     actualizarEmpleado,
     borrarEmpleado
