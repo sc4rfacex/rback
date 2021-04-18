@@ -9,7 +9,8 @@ const dbConnection = async() => {
         await mongoose.connect(dbCredentials, {
             useNewUrlParser: true, 
             useUnifiedTopology: true,
-            useCreateIndex: true
+            useCreateIndex: true,
+            useFindAndModify: false
         });
 
         console.log(' DB Online ');

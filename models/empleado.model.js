@@ -3,7 +3,8 @@ const { Schema, model } = require('mongoose');
 const EmpleadoSchema = Schema ({
     numeroEmpleado: {
         type: Number,
-        required: true 
+        required: true,
+        unique: true
     },
     nombreEmpleado: {
         type: String,
@@ -19,3 +20,11 @@ const EmpleadoSchema = Schema ({
     }
 
 });
+
+EmpleadoSchema.method('toJSON', function(){
+
+    const { __v, ...object} = this.toObject();
+    return object;
+});
+
+module.exports = model( 'Empleado', EmpleadoSchema );
