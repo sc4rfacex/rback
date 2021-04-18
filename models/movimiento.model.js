@@ -5,7 +5,7 @@ const MovimientoSchema = Schema ({
         type: Number
     },
     fecha: {
-        type: String,
+        type: Date,
         required: true,
     },
     cantidadEntregas: {
@@ -13,7 +13,7 @@ const MovimientoSchema = Schema ({
         required: true
     },
     cubrioTurno: {
-        type: Boolean,
+        type: Number,
         required: true,
         default: false
     },

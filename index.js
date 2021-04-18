@@ -20,6 +20,7 @@ dbConnection();
 //Rutas
 app.use( '/api/empleados', require('./routes/empleados.routes') );
 app.use( '/api/movimientos', require('./routes/movimientos.routes') );
+app.use( '/api/nominas', require('./routes/nominas.routes') );
 
 
 

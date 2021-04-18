@@ -1,7 +1,30 @@
 const { response } = require('express');
 const { validarCampos } = require('../middleware/validar-campos');
+const { getMenuFront } = require('../helpers/menu');
 
 const Empleado = require('../models/empleado.model');
+
+const obtenerMenu = async (req, res = response) => {
+
+    let menu = []
+    try {
+        menu = await getMenuFront();
+
+        res.status(200).json({
+            ok:true,
+            menu
+        })
+
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg: 'Hubo un error obteniendo el menu'
+        })
+    }
+
+}
 
 const obtenerEmpleados = async (req, res) =>{
     
@@ -149,6 +172,7 @@ const borrarEmpleado = async ( req, res = response) => {
 }
 
 module.exports = {
+    obtenerMenu,
     obtenerEmpleados,
     obtenerEmpleado,
     insertarEmpleado,

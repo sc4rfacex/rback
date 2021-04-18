@@ -5,9 +5,17 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middleware/validar-campos');
-const { obtenerEmpleados, obtenerEmpleado, insertarEmpleado, actualizarEmpleado, borrarEmpleado } = require('../controllers/empleados.controllers');
+const { obtenerMenu,
+        obtenerEmpleados, 
+        obtenerEmpleado, 
+        insertarEmpleado, 
+        actualizarEmpleado, 
+        borrarEmpleado } = require('../controllers/empleados.controllers');
 
 const router = Router();
+
+//Obtener menu
+router.get('/menu', obtenerMenu);
 
 //Obtener todos los empleados
 router.get('/', obtenerEmpleados );
