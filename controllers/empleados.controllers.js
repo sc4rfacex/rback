@@ -28,11 +28,21 @@ const obtenerMenu = async (req, res = response) => {
 
 const obtenerEmpleados = async (req, res) =>{
     
-    const empleados = await Empleado.find();
+    const desde = Number(req.query.desde) || 0;
+
+    const [empleados, total] = await Promise.all([
+        Empleado.find()
+                .skip( desde )
+                .limit( 10 ),
+        
+        Empleado.countDocuments()
+
+    ]);
 
     res.json({
         ok: true,
-        empleados
+        empleados,
+        total
     });
 }   
 

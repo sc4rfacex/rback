@@ -3,7 +3,7 @@ const getMenuFront = () => {
         {
             titulo: 'Dashboard',
             icono: 'mdi me-2 mdi-gauge',
-            url:'/'
+            url:'/dashboard'
         },
         {
             titulo: 'Empleados',

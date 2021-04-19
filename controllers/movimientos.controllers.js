@@ -5,12 +5,22 @@ const Empleado = require('../models/empleado.model');
 
 const obtenerMovimientos = async ( req, res = response ) => {
 
-    const movimientos = await Movimiento.find()
-        .populate( 'empleado', 'nombreEmpleado rolEmpleado tipoEmpleado' );
+    const desde = Number(req.query.desde) || 0;
+
+    const [movimientos, total] = await Promise.all([
+        Movimiento.find()
+                .populate( 'empleado', 'nombreEmpleado rolEmpleado tipoEmpleado' )
+                .skip( desde )
+                .limit( 10 ),
+        
+        Movimiento.countDocuments()
+
+    ]);
 
     res.json({
         ok:true,
-        movimientos
+        movimientos,
+        total
     })
 }
 

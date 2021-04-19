@@ -132,10 +132,19 @@ const generarNomina = async (req, res = response) =>{
 }
 
 const obtenerNominas = async ( req, resp = response ) => {
+    
+    const desde = Number(req.query.desde) || 0;
 
     try {
-
-        const nominas = await Nomina.find();
+        const [nominas, total] = await Promise.all([
+              Nomina.find()
+                    .populate( 'empleado', 'nombreEmpleado rolEmpleado tipoEmpleado' )
+                    .skip( desde )
+                    .limit( 10 ),
+            
+            Nomina.countDocuments()
+    
+        ]);
 
         if( !nominas ){
             resp.status(404).json({
@@ -146,7 +155,8 @@ const obtenerNominas = async ( req, resp = response ) => {
 
         resp.status(200).json({
             ok: true,
-            nominas
+            nominas,
+            total
         });
 
         
